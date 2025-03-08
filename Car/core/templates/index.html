@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Information Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+
+        h1 {
+            color: #333;
+            font-weight: 600;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .form-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .form-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 20px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            flex: 1;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+            background-color: #fff;
+        }
+
+        .form-group:focus-within label {
+            color: #667eea;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 25px;
+            padding: 5px 0;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            width: 20px;
+            height: 20px;
+            accent-color: #667eea;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 40px auto 10px;
+            width: 250px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .container {
+                padding: 30px 20px;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        ::placeholder {
+            color: #aaa;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+
+            <h1>Vehicle Information</h1>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-section">
+                <h2 class="section-title">Basic Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand" required>
+                            <option value="Ford" selected>Ford</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Jaguar">Jaguar</option>
+                            <option value="Pontiac">Pontiac</option>
+                            <option value="Acura">Acura</option>
+                            <option value="Audi">Audi</option>
+                            <option value="GMC">GMC</option>
+                            <option value="Maserati">Maserati</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Tesla">Tesla</option>
+                            <option value="Lexus">Lexus</option>
+                            <option value="Kia">Kia</option>
+                            <option value="Lincoln">Lincoln</option>
+                            <option value="Dodge">Dodge</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                            <option value="Land">Land</option>
+                            <option value="Cadillac">Cadillac</option>
+                            <option value="Mazda">Mazda</option>
+                            <option value="RAM">RAM</option>
+                            <option value="Subaru">Subaru</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="MINI">MINI</option>
+                            <option value="Jeep">Jeep</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Hummer">Hummer</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Volvo">Volvo</option>
+                            <option value="Genesis">Genesis</option>
+                            <option value="Mitsubishi">Mitsubishi</option>
+                            <option value="Buick">Buick</option>
+                            <option value="INFINITI">INFINITI</option>
+                            <option value="McLaren">McLaren</option>
+                            <option value="Scion">Scion</option>
+                            <option value="Lamborghini">Lamborghini</option>
+                            <option value="Bentley">Bentley</option>
+                            <option value="Suzuki">Suzuki</option>
+                            <option value="Ferrari">Ferrari</option>
+                            <option value="Alfa">Alfa</option>
+                            <option value="Rolls-Royce">Rolls-Royce</option>
+                            <option value="Chrysler">Chrysler</option>
+                            <option value="Aston">Aston</option>
+                            <option value="Rivian">Rivian</option>
+                            <option value="Lotus">Lotus</option>
+                            <option value="Saturn">Saturn</option>
+                            <option value="Lucid">Lucid</option>
+                            <option value="Mercury">Mercury</option>
+                            <option value="Maybach">Maybach</option>
+                            <option value="FIAT">FIAT</option>
+                            <option value="Plymouth">Plymouth</option>
+                            <option value="Bugatti">Bugatti</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Model</label>
+                        <select id="model" name="model" required>
+                            <option value="F-150 Lariat" selected>F-150 Lariat</option>
+                            <option value="335 i">335 i</option>
+                            <option value="XF Luxury">XF Luxury</option>
+                            <option value="Q4 e-tron Sportback Premium">Q4 e-tron Sportback Premium</option>
+                            <option value="Countryman Cooper">Countryman Cooper</option>
+                            <option value="S-10 LS">S-10 LS</option>
+                            <option value="F-150 XLT">F-150 XLT</option>
+                            <option value="F-150 Raptor">F-150 Raptor</option>
+                            <option value="Mustang">Mustang</option>
+                            <option value="Explorer">Explorer</option>
+                            <option value="Escape">Escape</option>
+                            <option value="Bronco">Bronco</option>
+                            <option value="Edge">Edge</option>
+                            <option value="Ranger">Ranger</option>
+                            <option value="Expedition">Expedition</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="model_year">Model Year</label>
+                        <input type="number" id="model_year" name="model_year" value="2018" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mileage">Mileage</label>
+                        <input type="number" id="mileage" name="mileage" value="74349" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">Technical Specifications</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fuel_type">Fuel Type</label>
+                        <select id="fuel_type" name="fuel_type" required>
+                            <option value="Gasoline" selected>Gasoline</option>
+                            <option value="Hybrid">Hybrid</option>
+                            <option value="E85 Flex Fuel">E85 Flex Fuel</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="–">–</option>
+                            <option value="Plug-In Hybrid">Plug-In Hybrid</option>
+                            <option value="not supported">not supported</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transmission">Transmission</label>
+                        <select id="transmission" name="transmission" required>
+                            <option value="10-Speed A/T" selected>10-Speed A/T</option>
+                            <option value="6-Speed M/T">6-Speed M/T</option>
+                            <option value="6-Speed A/T">6-Speed A/T</option>
+                            <option value="Transmission w/Dual Shift Mode">Transmission w/Dual Shift Mode</option>
+                            <option value="A/T">A/T</option>
+                            <option value="5-Speed M/T">5-Speed M/T</option>
+                            <option value="7-Speed A/T">7-Speed A/T</option>
+                            <option value="5-Speed A/T">5-Speed A/T</option>
+                            <option value="8-Speed A/T">8-Speed A/T</option>
+                            <option value="Transmission Overdrive Switch">Transmission Overdrive Switch</option>
+                            <option value="9-Speed Automatic">9-Speed Automatic</option>
+                            <option value="7-Speed M/T">7-Speed M/T</option>
+                            <option value="10-Speed Automatic">10-Speed Automatic</option>
+                            <option value="6-Speed Automatic">6-Speed Automatic</option>
+                            <option value="M/T">M/T</option>
+                            <option value="5-Speed Automatic">5-Speed Automatic</option>
+                            <option value="CVT Transmission">CVT Transmission</option>
+                            <option value="9-Speed A/T">9-Speed A/T</option>
+                            <option value="8-Speed Automatic">8-Speed Automatic</option>
+                            <option value="4-Speed A/T">4-Speed A/T</option>
+                            <option value="Automatic">Automatic</option>
+                            <option value="1-Speed A/T">1-Speed A/T</option>
+                            <option value="8-Speed Automatic with Auto-Shift">8-Speed Automatic with Auto-Shift</option>
+                            <option value="7-Speed DCT Automatic">7-Speed DCT Automatic</option>
+                            <option value="Automatic CVT">Automatic CVT</option>
+                            <option value="7-Speed Automatic">7-Speed Automatic</option>
+                            <option value="7-Speed Automatic with Auto-Shift">7-Speed Automatic with Auto-Shift</option>
+                            <option value="4-Speed Automatic">4-Speed Automatic</option>
+                            <option value="6-Speed Automatic with Auto-Shift">6-Speed Automatic with Auto-Shift</option>
+                            <option value="6-Speed Manual">6-Speed Manual</option>
+                            <option value="7-Speed Manual">7-Speed Manual</option>
+                            <option value="6-Speed Electronically Controlled Automatic with O">6-Speed Electronically Controlled Automatic with O</option>
+                            <option value="1-Speed Automatic">1-Speed Automatic</option>
+                            <option value="10-Speed Automatic with Overdrive">10-Speed Automatic with Overdrive</option>
+                            <option value="8-Speed Manual">8-Speed Manual</option>
+                            <option value="2-Speed A/T">2-Speed A/T</option>
+                            <option value="CVT-F">CVT-F</option>
+                            <option value="–">–</option>
+                            <option value="F">F</option>
+                            <option value="9-Speed Automatic with Auto-Shift">9-Speed Automatic with Auto-Shift</option>
+                            <option value="7-Speed">7-Speed</option>
+                            <option value="Variable">Variable</option>
+                            <option value="SCHEDULED FOR OR IN PRODUCTION">SCHEDULED FOR OR IN PRODUCTION</option>
+                            <option value="6-Speed">6-Speed</option>
+                            <option value="6 Speed At/Mt">6 Speed At/Mt</option>
+                            <option value="6 Speed Mt">6 Speed Mt</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hp">Horsepower</label>
+                        <select id="hp" name="hp" required>
+                            <option value="375.0" selected>375.0 HP</option>
+                            <option value="300.0">300.0 HP</option>
+                            <option value="250.0">250.0 HP</option>
+                            <option value="400.0">400.0 HP</option>
+                            <option value="450.0">450.0 HP</option>
+                            <option value="500.0">500.0 HP</option>
+                            <option value="350.0">350.0 HP</option>
+                            <option value="325.0">325.0 HP</option>
+                            <option value="275.0">275.0 HP</option>
+                            <option value="225.0">225.0 HP</option>
+                            <option value="200.0">200.0 HP</option>
+                            <option value="420.0">420.0 HP</option>
+                            <option value="380.0">380.0 HP</option>
+                            <option value="310.0">310.0 HP</option>
+                            <option value="120.0">120.0 HP</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="engine_size">Engine Size (L)</label>
+                        <select id="engine_size" name="engine_size" required>
+                            <option value="5.0" selected>5.0L</option>
+                            <option value="3.5">3.5L</option>
+                            <option value="3.0">3.0L</option>
+                            <option value="4.2">4.2L</option>
+                            <option value="2.7">2.7L</option>
+                            <option value="2.5">2.5L</option>
+                            <option value="2.3">2.3L</option>
+                            <option value="2.0">2.0L</option>
+                            <option value="1.8">1.8L</option>
+                            <option value="1.6">1.6L</option>
+                            <option value="1.5">1.5L</option>
+                            <option value="4.6">4.6L</option>
+                            <option value="4.0">4.0L</option>
+                            <option value="3.0 Liter GTDI">3.0 Liter GTDI</option>
+                            <option value="2.2">2.2L</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">Vehicle History</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="accident">Accident History</label>
+                        <select id="accident" name="accident" required>
+                            <option value="None reported" selected>None reported</option>
+                            <option value="At least 1 accident or damage reported">At least 1 accident or damage reported</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Clean Title</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="clean_title_yes" name="clean_title" value="yes" checked>
+                                <label for="clean_title_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="clean_title_no" name="clean_title" value="no">
+                                <label for="clean_title_no">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Submit Information</button>
+            {% if prediction  %}
+            <div class="price-section">
+                <span>Price: {{ prediction }}</span>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
